@@ -381,7 +381,6 @@ ComparisonSort.prototype.bubbleSortCallback = function(event)
 
 			this.cmd("SetForegroundColor", this.barObjects[j+1], BAR_FOREGROUND_COLOR);
 			this.cmd("SetBackgroundColor", this.barObjects[j+1], BAR_BACKGROUND_COLOR);
-
 		}
 	}
 	this.animationManager.StartNewAnimation(this.commands);
@@ -651,10 +650,11 @@ ComparisonSort.prototype.insertionSortSkip = function(inc, offset)
 	}
 }
 
+
 ComparisonSort.prototype.disableUI = function(event)
 {
 	this.resetButton.disabled = true;
-	//this.insertSortButton.disabled = true;
+	this.insertSortButton.disabled = true;
     //this.selectSortButton.disabled = true;
 	this.bubbleSortButton.disabled = true;
 	//this.quickSortButton.disabled = true;
@@ -665,7 +665,7 @@ ComparisonSort.prototype.disableUI = function(event)
 ComparisonSort.prototype.enableUI = function(event)
 {
 	this.resetButton.disabled = false;
-	//this.insertSortButton.disabled = false;
+	this.insertSortButton.disabled = false;
 	//this.selectSortButton.disabled = false;
 	this.bubbleSortButton.disabled = false;
 	//this.quickSortButton.disabled = false;
