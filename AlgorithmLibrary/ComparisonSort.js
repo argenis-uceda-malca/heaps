@@ -97,9 +97,9 @@ ComparisonSort.prototype.addControls =  function()
 	this.bubbleSortButton = addControlToAlgorithmBar("Button", "Bubble Sort");
 	this.bubbleSortButton.onclick = this.bubbleSortCallback.bind(this);
 
-	/*this.quickSortButton = addControlToAlgorithmBar("Button", "Quick Sort");
+	this.quickSortButton = addControlToAlgorithmBar("Button", "Quick Sort");
 	this.quickSortButton.onclick = this.quickSortCallback.bind(this);
-
+/*
 	this.mergeSortButton = addControlToAlgorithmBar("Button", "Merge Sort");
 	this.mergeSortButton.onclick = this.mergeSortCallback.bind(this);
 
@@ -406,7 +406,7 @@ ComparisonSort.prototype.quickSortCallback = function(event)
 
 ComparisonSort.prototype.doQuickSort = function(low, high)
 {
-	this.highlightRange(low,high);
+	//this.highlightRange(low,high);
 	if (high <= low)
 		return;
 	this.cmd("Step");
@@ -657,7 +657,7 @@ ComparisonSort.prototype.disableUI = function(event)
 	//this.insertSortButton.disabled = true;
     //this.selectSortButton.disabled = true;
 	this.bubbleSortButton.disabled = true;
-	//this.quickSortButton.disabled = true;
+	this.quickSortButton.disabled = true;
 	//this.mergeSortButton.disabled = true;
 	//this.shellSortButton.disabled = true;
 	//this.sizeButton.disabled = true;
@@ -668,7 +668,7 @@ ComparisonSort.prototype.enableUI = function(event)
 	//this.insertSortButton.disabled = false;
 	//this.selectSortButton.disabled = false;
 	this.bubbleSortButton.disabled = false;
-	//this.quickSortButton.disabled = false;
+	this.quickSortButton.disabled = false;
 	//this.mergeSortButton.disabled = false;
 	//this.shellSortButton.disabled = false;
 	//this.sizeButton.disabled = false;
