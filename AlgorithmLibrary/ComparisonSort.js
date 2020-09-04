@@ -53,8 +53,8 @@ var ARRAY_INITIAL_X_LARGE = 15;
 var BAR_FOREGROUND_COLOR = "#0000FF";
 var BAR_BACKGROUND_COLOR ="#AAAAFF";
 var INDEX_COLOR = "#0000FF";
-var HIGHLIGHT_BAR_COLOR = "#FF0000";
-var HIGHLIGHT_BAR_BACKGROUND_COLOR = "#FFAAAA";
+var HIGHLIGHT_BAR_COLOR = "#FF0000";//rojo oscuro
+var HIGHLIGHT_BAR_BACKGROUND_COLOR = "#FFAAAA";//rojo claro
 
 var QUICKSORT_LINE_COLOR = "#FF0000";
 
@@ -392,12 +392,12 @@ ComparisonSort.prototype.quickSortCallback = function(event)
 	this.commands = new Array();
 	this.iID = this.nextIndex++;
 	this.jID= this.nextIndex++;
-	this.cmd("CreateLabel", this.iID, "i", this.barObjects[0], this.array_label_y_pos + 20);
-	this.cmd("CreateLabel", this.jID, "j", this.barObjects[this.array_size - 1], this.array_label_y_pos + 20);
-	this.cmd("SetForegroundColor", this.iID, HIGHLIGHT_BAR_COLOR);
-	this.cmd("SetBackgroundColor", this.iID, HIGHLIGHT_BAR_BACKGROUND_COLOR);
-	this.cmd("SetForegroundColor", this.jID, HIGHLIGHT_BAR_COLOR);			
-	this.cmd("SetBackgroundColor", this.jID, HIGHLIGHT_BAR_BACKGROUND_COLOR);
+	//this.cmd("CreateLabel", this.iID, "i", this.barObjects[0], this.array_label_y_pos + 20);
+	//this.cmd("CreateLabel", this.jID, "j", this.barObjects[this.array_size - 1], this.array_label_y_pos + 20);
+	//this.cmd("SetForegroundColor", this.iID, HIGHLIGHT_BAR_COLOR);
+    //this.cmd("SetBackgroundColor", this.iID, HIGHLIGHT_BAR_BACKGROUND_COLOR);
+	//this.cmd("SetForegroundColor", this.jID, HIGHLIGHT_BAR_COLOR);			
+	//this.cmd("SetBackgroundColor", this.jID, HIGHLIGHT_BAR_BACKGROUND_COLOR);
 	this.doQuickSort(0, this.array_size - 1);			
 	this.cmd("Delete", this.iID);
 	this.cmd("Delete", this.jID);
@@ -424,9 +424,9 @@ ComparisonSort.prototype.doQuickSort = function(low, high)
 	while (i <= j)
 	{
 		
-		this.cmd("SetForegroundColor", this.barObjects[i], HIGHLIGHT_BAR_COLOR);
-		this.cmd("SetBackgroundColor", this.barObjects[i], HIGHLIGHT_BAR_BACKGROUND_COLOR);
-		this.cmd("SetForegroundColor", this.barObjects[low], HIGHLIGHT_BAR_COLOR);
+		this.cmd("SetForedColor", this.barObjects[i], HIGHLIGHT_BAR_BACKGROUND_COLOR);
+		this.cmd("SetForegroundCologroundColor", this.barObjects[i], HIGHLIGHT_BAR_COLOR);
+		this.cmd("SetBackgrounr", this.barObjects[low], HIGHLIGHT_BAR_COLOR);
 		this.cmd("SetBackgroundColor", this.barObjects[low], HIGHLIGHT_BAR_BACKGROUND_COLOR);
 		this.cmd("Step");	
 		this.cmd("SetForegroundColor", this.barObjects[low], BAR_FOREGROUND_COLOR);
@@ -509,7 +509,7 @@ ComparisonSort.prototype.doQuickSort = function(low, high)
 	
 	this.doQuickSort(low, j-1);
 	this.doQuickSort(j+1,high);
-	this.highlightRange(low,high);
+	//this.highlightRange(low,high);
 }		
 
 ComparisonSort.prototype.mergeSortCallback = function(event)
