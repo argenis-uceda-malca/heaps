@@ -1,28 +1,3 @@
-// Copyright 2011 David Galles, University of San Francisco. All rights reserved.
-//
-// Redistribution and use in source and binary forms, with or without modification, are
-// permitted provided that the following conditions are met:
-//
-// 1. Redistributions of source code must retain the above copyright notice, this list of
-// conditions and the following disclaimer.
-//
-// 2. Redistributions in binary form must reproduce the above copyright notice, this list
-// of conditions and the following disclaimer in the documentation and/or other materials
-// provided with the distribution.
-//
-// THIS SOFTWARE IS PROVIDED BY <COPYRIGHT HOLDER> ``AS IS'' AND ANY EXPRESS OR IMPLIED
-// WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-// FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> OR
-// CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-// CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-// SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-// ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-// NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-// ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
-// The views and conclusions contained in the software and documentation are those of the
-// authors and should not be interpreted as representing official policies, either expressed
-// or implied, of the University of San Francisco
 
 
 function ComparisonSort(am, w, h)
@@ -392,11 +367,11 @@ ComparisonSort.prototype.quickSortCallback = function(event)
 	this.commands = new Array();
 	this.iID = this.nextIndex++;
 	this.jID= this.nextIndex++;
-	//this.cmd("CreateLabel", this.iID, "i", this.barObjects[0], this.array_label_y_pos + 20);
-	//this.cmd("CreateLabel", this.jID, "j", this.barObjects[this.array_size - 1], this.array_label_y_pos + 20);
-	//this.cmd("SetForegroundColor", this.iID, HIGHLIGHT_BAR_COLOR);
-    //this.cmd("SetBackgroundColor", this.iID, HIGHLIGHT_BAR_BACKGROUND_COLOR);
-	//this.cmd("SetForegroundColor", this.jID, HIGHLIGHT_BAR_COLOR);			
+	this.cmd("CreateLabel", this.iID, "i", this.barObjects[0], this.array_label_y_pos + 20);
+	this.cmd("CreateLabel", this.jID, "j", this.barObjects[this.array_size - 1], this.array_label_y_pos + 20);
+	this.cmd("SetForegroundColor", this.iID, HIGHLIGHT_BAR_COLOR);
+    this.cmd("SetBackgroundColor", this.iID, HIGHLIGHT_BAR_BACKGROUND_COLOR);
+	this.cmd("SetForegroundColor", this.jID, HIGHLIGHT_BAR_COLOR);			
 	this.cmd("SetBackgroundColor", this.jID, HIGHLIGHT_BAR_BACKGROUND_COLOR);
 	this.doQuickSort(0, this.array_size - 1);			
 	this.cmd("Delete", this.iID);
@@ -511,21 +486,7 @@ ComparisonSort.prototype.doQuickSort = function(low, high)
 	this.doQuickSort(j+1,high);
 	//this.highlightRange(low,high);
 }
-/*Estructura basica recursiva 
-funcion heasp(int n; A[] array){
-	if (n==1){
-		return A;
-	}else {
-		for (int i=0; i<n-1;i++){
-			heasp(n-1;A);
-			if (n mod 2){
-				this.swap(A[i],A[n-1]);
-			}else{
-				this.swap(A[0],A[n-1]);
-			}
-		}
-	}
-}*/
+
 
 /*Estructura basica no recursiva 
 funcion heasp2(int n; A[]array ){
@@ -551,15 +512,45 @@ funcion heasp2(int n; A[]array ){
 	}
 }*/
 
+/*Estructura basica recursiva 
+funcion heasp(int n; A[] array){
+	if (n==1){
+		return A;
+	}else {
+		for (int i=0; i<n-1;i++){
+			heasp(n-1;A);
+			if (n mod 2==0){
+				this.swap(A[i],A[n-1]);
+			}else{
+				this.swap(A[0],A[n-1]);
+			}
+		}
+	heasp(n-1,A);
+	}
+}*/
 //creado el primer metodo HEAPS de forma recursiva 
 ComparisonSort.prototype.heaps = function(event){
+	this.animationManager.clearHistory();
+	this.commands = new Array();
+	this.doHeapSort(0, this.array_size-1);
 	
 }	
+ComparisonSort.prototype.doHeapSort = function(low,high){
+	if (this.array_size==1){
+		this.animationManager.StartNewAnimation(this.commands);
+	}else{
+		for (let i = 0; i < high-1; i++) {
+			this.doHeapSort(low, high-1);
+			if (high mod %2 == 0){
 
+			}
+		}
+	}
+}
 ComparisonSort.prototype.mergeSortCallback = function(event)
 {
 	this.animationManager.clearHistory();
-	
+
 	this.commands = new Array();
 	this.doMergeSort(0, this.array_size-1);
 	this.animationManager.StartNewAnimation(this.commands);
