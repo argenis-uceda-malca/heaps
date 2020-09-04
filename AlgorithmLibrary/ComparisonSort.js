@@ -521,13 +521,35 @@ funcion heasp(int n; A[] array){
 			if (n mod 2){
 				this.swap(A[i],A[n-1]);
 			}else{
-				this.swap(A[i],A[n-1]);
+				this.swap(A[0],A[n-1]);
 			}
 		}
 	}
 }*/
 
-//Estructura basica no recursiva 
+/*Estructura basica no recursiva 
+funcion heasp2(int n; A[]array ){
+	int C[]:
+	for (let i = 0; i < array.length; i++) {
+		c[i]=0;		
+	}
+	return A
+	int i=0;
+	while (i<n){
+		if(c[i]<i){
+			if(i mod 2){
+				this.swap(A[0],A[i]);
+			}else {
+				this.swap(A[c[i]],A[i]);
+			}return A;
+			c[i]++;
+			i=0;
+		}else{
+			c[i]=0;
+			i++;
+		}
+	}
+}*/
 
 //creado el primer metodo HEAPS de forma recursiva 
 ComparisonSort.prototype.heaps = function(event){
