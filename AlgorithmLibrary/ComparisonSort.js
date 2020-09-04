@@ -510,7 +510,29 @@ ComparisonSort.prototype.doQuickSort = function(low, high)
 	this.doQuickSort(low, j-1);
 	this.doQuickSort(j+1,high);
 	//this.highlightRange(low,high);
-}		
+}
+/*Estructura basica recursiva 
+funcion heasp(int n; A[] array){
+	if (n==1){
+		return A;
+	}else {
+		for (int i=0; i<n-1;i++){
+			heasp(n-1;A);
+			if (n mod 2){
+				this.swap(A[i],A[n-1]);
+			}else{
+				this.swap(A[i],A[n-1]);
+			}
+		}
+	}
+}*/
+
+//Estructura basica no recursiva 
+
+//creado el primer metodo HEAPS de forma recursiva 
+ComparisonSort.prototype.heaps = function(event){
+	
+}	
 
 ComparisonSort.prototype.mergeSortCallback = function(event)
 {
