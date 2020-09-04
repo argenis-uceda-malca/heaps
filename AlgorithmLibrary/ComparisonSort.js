@@ -397,7 +397,7 @@ ComparisonSort.prototype.quickSortCallback = function(event)
 	//this.cmd("SetForegroundColor", this.iID, HIGHLIGHT_BAR_COLOR);
     //this.cmd("SetBackgroundColor", this.iID, HIGHLIGHT_BAR_BACKGROUND_COLOR);
 	//this.cmd("SetForegroundColor", this.jID, HIGHLIGHT_BAR_COLOR);			
-	//this.cmd("SetBackgroundColor", this.jID, HIGHLIGHT_BAR_BACKGROUND_COLOR);
+	this.cmd("SetBackgroundColor", this.jID, HIGHLIGHT_BAR_BACKGROUND_COLOR);
 	this.doQuickSort(0, this.array_size - 1);			
 	this.cmd("Delete", this.iID);
 	this.cmd("Delete", this.jID);
