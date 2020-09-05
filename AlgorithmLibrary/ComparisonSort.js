@@ -74,7 +74,7 @@ ComparisonSort.prototype.addControls =  function()
 
 	this.quickSortButton = addControlToAlgorithmBar("Button", "Quick Sort");
 	this.quickSortButton.onclick = this.quickSortCallback.bind(this);
-/*
+    /*
 	this.mergeSortButton = addControlToAlgorithmBar("Button", "Merge Sort");
 	this.mergeSortButton.onclick = this.mergeSortCallback.bind(this);
 
@@ -85,7 +85,13 @@ ComparisonSort.prototype.addControls =  function()
 	//this.sizeButton.onclick = this.changeSizeCallback.bind(this);
 
 	this.heapsSortButton = addControlToAlgorithmBar("Button", "Heaps Sort");
-	this.heapsSortButton.onclick = this.heaps.bind(this);
+	this.heapsSortButton.onclick = this.doHeapSort2.bind(this);
+
+	/*this.pruebaSortButton = addControlToAlgorithmBar("Button", "prueba Sort");
+	this.pruebaSortButton.onclick = this.prueba.bind(this);*/
+
+	this.bubbleSort2Button = addControlToAlgorithmBar("Button", "Bubble Sort2");
+	this.bubbleSort2Button.onclick = this.bubbleSortCallback2.bind(this);
 
 }
 
@@ -222,7 +228,7 @@ ComparisonSort.prototype.createVisualObjects = function()
 	}
 	this.lastCreatedIndex = this.nextIndex;
 }
-
+//para sombrear las barras 
 ComparisonSort.prototype.highlightRange  = function(lowIndex, highIndex)
 {
 	for (var i = 0; i < lowIndex; i++)
@@ -345,22 +351,22 @@ ComparisonSort.prototype.bubbleSortCallback = function(event)
 	{
 		for (var j = 0; j < i; j++)
 		{
-			this.cmd("SetForegroundColor", this.barObjects[j], HIGHLIGHT_BAR_COLOR);
+			//this.cmd("SetForegroundColor", this.barObjects[j], HIGHLIGHT_BAR_COLOR);
 			//this.cmd("SetBackgroundColor", this.barObjects[j], HIGHLIGHT_BAR_BACKGROUND_COLOR);
 
-			this.cmd("SetForegroundColor", this.barObjects[j+1], HIGHLIGHT_BAR_COLOR);
+			//this.cmd("SetForegroundColor", this.barObjects[j+1], HIGHLIGHT_BAR_COLOR);
 			//this.cmd("SetBackgroundColor", this.barObjects[j+1], HIGHLIGHT_BAR_BACKGROUND_COLOR);
 			
-			this.cmd("Step");
+			this.cmd("Step");//da una pausa
 			if (this.arrayData[j] > this.arrayData[j+1])
 			{
 				this.swap(j,j+1);
 			}
-			this.cmd("SetForegroundColor", this.barObjects[j], BAR_FOREGROUND_COLOR);
-			this.cmd("SetBackgroundColor", this.barObjects[j], BAR_BACKGROUND_COLOR);
+			//this.cmd("SetForegroundColor", this.barObjects[j], BAR_FOREGROUND_COLOR);
+			//this.cmd("SetBackgroundColor", this.barObjects[j], BAR_BACKGROUND_COLOR);
 
-			this.cmd("SetForegroundColor", this.barObjects[j+1], BAR_FOREGROUND_COLOR);
-			this.cmd("SetBackgroundColor", this.barObjects[j+1], BAR_BACKGROUND_COLOR);
+			//this.cmd("SetForegroundColor", this.barObjects[j+1], BAR_FOREGROUND_COLOR);
+			//this.cmd("SetBackgroundColor", this.barObjects[j+1], BAR_BACKGROUND_COLOR);
 		}
 	}
 	this.animationManager.StartNewAnimation(this.commands);
@@ -386,7 +392,7 @@ ComparisonSort.prototype.quickSortCallback = function(event)
 
 ComparisonSort.prototype.doQuickSort = function(low, high)
 {
-	//this.highlightRange(low,high);
+	//this.highlightRange(low,high); //sirve para sombrear las barras 
 	if (high <= low)
 		return;
 	this.cmd("Step");
@@ -553,14 +559,61 @@ ComparisonSort.prototype.doHeapSort = function(low,high){
 	}
 }
 
-ComparisonSort.prototype.doHeapSort2 = function(n){
-	for (var i = n/2 -1; i>=0; i--) {
-		this.heapify(n,i);
+/////
+ComparisonSort.prototype.bubbleSortCallback2 = function(event)
+{
+	this.animationManager.clearHistory();
+	
+	this.commands = new Array();
+	/*for (var i = this.array_size-1; i > 0; i--)
+	{
+		for (var j = 0; j < i; j++)
+		{
+			//this.cmd("SetForegroundColor", this.barObjects[j], HIGHLIGHT_BAR_COLOR);
+			//this.cmd("SetBackgroundColor", this.barObjects[j], HIGHLIGHT_BAR_BACKGROUND_COLOR);
+
+			//this.cmd("SetForegroundColor", this.barObjects[j+1], HIGHLIGHT_BAR_COLOR);
+			//this.cmd("SetBackgroundColor", this.barObjects[j+1], HIGHLIGHT_BAR_BACKGROUND_COLOR);
+			
+			this.cmd("Step");//da una pausa
+			if (this.arrayData[j] < this.arrayData[j+1])
+			{
+				this.swap(j,j+1);
+			}
+			//this.cmd("SetForegroundColor", this.barObjects[j], BAR_FOREGROUND_COLOR);
+			//this.cmd("SetBackgroundColor", this.barObjects[j], BAR_BACKGROUND_COLOR);
+
+			//this.cmd("SetForegroundColor", this.barObjects[j+1], BAR_FOREGROUND_COLOR);
+			//this.cmd("SetBackgroundColor", this.barObjects[j+1], BAR_BACKGROUND_COLOR);
+		}
+	}*/
+	/*for (var i = this.array_size/2 -1; i>=0 ;i--) {
+		this.heapify(this.array_size,i);
+		//this.animationManager.StartNewAnimation(this.commands);
+	}*/
+	for(var i=this.array_size-1; i>=0 ;i--){
+		//this.swap(arrayData[0],arrayData[i]); //error : el swap solo recibe el indice y no el dato
+		this.swap(0,i);
+		//this.heapify(i,0);
+		//this.animationManager.StartNewAnimation(this.commands);
 	}
-	for(var i=n-1; i>0;i--){
+	this.animationManager.StartNewAnimation(this.commands);
+}
+
+ComparisonSort.prototype.doHeapSort2 = function(event){
+	this.animationManager.clearHistory();
+	
+	this.commands = new Array();
+	for (var i = this.array_size/2 -1; i>=0 ;i--) {
+		this.heapify(this.array_size-1,i);
+		//this.animationManager.StartNewAnimation(this.commands);
+	}
+	for(var i=this.array_size-1; i>=0 ;i--){
 		this.swap(this.arrayData[0],this.arrayData[i]);
 		this.heapify(i,0);
+		//this.animationManager.StartNewAnimation(this.commands);
 	}
+	this.animationManager.StartNewAnimation(this.commands);
 }
 ComparisonSort.prototype.heapify = function(n,i){
 	var lergest = i;
@@ -568,16 +621,17 @@ ComparisonSort.prototype.heapify = function(n,i){
 	var r=2*i+2;
 
 	if (l<n && this.arrayData[l]>this.arrayData[largest]) {
-		lergest = 1;
+		lergest = l;
 	}
 	if (r<n && this.arrayData[r] > this.arrayData[largest]){
 		largest=r;
 	}
 	if (largest !=i){
-		this.swap(this.arrayData[i],this.arrayData[largest]);
+		this.swap(i,largest);
 
 		//recursividad 
 		this.heapify(n,largest);
+		this.animationManager.StartNewAnimation(this.commands);
 	}
 }
 ComparisonSort.prototype.mergeSortCallback = function(event)
@@ -728,6 +782,9 @@ ComparisonSort.prototype.disableUI = function(event)
 	//this.mergeSortButton.disabled = true;
 	//this.shellSortButton.disabled = true;
 	//this.sizeButton.disabled = true;
+	this.heapsSortButton.disabled = true;
+	//this.pruebaSortButton.disabled = true;
+	this.bubbleSort2Button.disabled = true;
 }
 ComparisonSort.prototype.enableUI = function(event)
 {
@@ -740,6 +797,9 @@ ComparisonSort.prototype.enableUI = function(event)
 	//this.shellSortButton.disabled = false;
 	//this.sizeButton.disabled = false;
 	this.heapsSortButton.disabled = false;
+	//this.pruebaSortButton.disabled = false;
+	this.bubbleSort2Button.disabled = false;
+
 }
 
 
