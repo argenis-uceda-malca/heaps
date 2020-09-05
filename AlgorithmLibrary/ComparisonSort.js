@@ -83,6 +83,10 @@ ComparisonSort.prototype.addControls =  function()
 
 	//this.sizeButton = addControlToAlgorithmBar("Button", "Change Size");
 	//this.sizeButton.onclick = this.changeSizeCallback.bind(this);
+
+	this.heapsSortButton = addControlToAlgorithmBar("Button", "Heaps Sort");
+	this.heapsSortButton.onclick = this.heaps.bind(this);
+
 }
 
 		
@@ -342,10 +346,11 @@ ComparisonSort.prototype.bubbleSortCallback = function(event)
 		for (var j = 0; j < i; j++)
 		{
 			this.cmd("SetForegroundColor", this.barObjects[j], HIGHLIGHT_BAR_COLOR);
-			this.cmd("SetBackgroundColor", this.barObjects[j], HIGHLIGHT_BAR_BACKGROUND_COLOR);
+			//this.cmd("SetBackgroundColor", this.barObjects[j], HIGHLIGHT_BAR_BACKGROUND_COLOR);
 
 			this.cmd("SetForegroundColor", this.barObjects[j+1], HIGHLIGHT_BAR_COLOR);
-			this.cmd("SetBackgroundColor", this.barObjects[j+1], HIGHLIGHT_BAR_BACKGROUND_COLOR);
+			//this.cmd("SetBackgroundColor", this.barObjects[j+1], HIGHLIGHT_BAR_BACKGROUND_COLOR);
+			
 			this.cmd("Step");
 			if (this.arrayData[j] > this.arrayData[j+1])
 			{
@@ -410,7 +415,7 @@ ComparisonSort.prototype.doQuickSort = function(low, high)
 		this.cmd("SetForegroundColor", this.barObjects[i], BAR_FOREGROUND_COLOR);
 		this.cmd("SetBackgroundColor", this.barObjects[i], BAR_BACKGROUND_COLOR);
 		while (i <= j && this.arrayData[i] < pivot)
-		{
+		{//arrayData[i] es el  vector en la esa posicion 
 			++i;
 			this.cmd("Move", this.iID, this.barPositionsX[i], this.array_label_y_pos + 20);
 			this.cmd("Step");	
@@ -541,10 +546,38 @@ ComparisonSort.prototype.doHeapSort = function(low,high){
 	}else{
 		for (let i = 0; i < high-1; i++) {
 			this.doHeapSort(low, high-1);
-			if (high mod %2 == 0){
+			//if (high mod %2 == 0){
 
-			}
+			//}
 		}
+	}
+}
+
+ComparisonSort.prototype.doHeapSort2 = function(n){
+	for (var i = n/2 -1; i>=0; i--) {
+		this.heapify(n,i);
+	}
+	for(var i=n-1; i>0;i--){
+		this.swap(this.arrayData[0],this.arrayData[i]);
+		this.heapify(i,0);
+	}
+}
+ComparisonSort.prototype.heapify = function(n,i){
+	var lergest = i;
+	var l=2*i+1;
+	var r=2*i+2;
+
+	if (l<n && this.arrayData[l]>this.arrayData[largest]) {
+		lergest = 1;
+	}
+	if (r<n && this.arrayData[r] > this.arrayData[largest]){
+		largest=r;
+	}
+	if (largest !=i){
+		this.swap(this.arrayData[i],this.arrayData[largest]);
+
+		//recursividad 
+		this.heapify(n,largest);
 	}
 }
 ComparisonSort.prototype.mergeSortCallback = function(event)
@@ -680,8 +713,7 @@ ComparisonSort.prototype.insertionSortSkip = function(inc, offset)
 			this.cmd("SetBackgroundColor", this.barObjects[j], BAR_BACKGROUND_COLOR);
 			this.cmd("SetBackgroundColor", this.barObjects[j - inc], BAR_BACKGROUND_COLOR);
 			j = j - inc;					
-		}
-		
+		}	
 	}
 }
 
@@ -707,6 +739,7 @@ ComparisonSort.prototype.enableUI = function(event)
 	//this.mergeSortButton.disabled = false;
 	//this.shellSortButton.disabled = false;
 	//this.sizeButton.disabled = false;
+	this.heapsSortButton.disabled = false;
 }
 
 
