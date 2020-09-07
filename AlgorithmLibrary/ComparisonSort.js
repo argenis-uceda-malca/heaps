@@ -63,35 +63,20 @@ ComparisonSort.prototype.addControls =  function()
 	this.resetButton = addControlToAlgorithmBar("Button", "Randomize Array");
 	this.resetButton.onclick = this.resetCallback.bind(this);
 
-	/*this.insertSortButton = addControlToAlgorithmBar("Button", "Insertion Sort");
-	this.insertSortButton.onclick = this.insertSortCallback.bind(this);
-
-	this.selectSortButton = addControlToAlgorithmBar("Button", "Selection Sort");
-	this.selectSortButton.onclick = this.selectSortCallback.bind(this);*/
-
 	this.bubbleSortButton = addControlToAlgorithmBar("Button", "Bubble Sort");
 	this.bubbleSortButton.onclick = this.bubbleSortCallback.bind(this);
 
 	this.quickSortButton = addControlToAlgorithmBar("Button", "Quick Sort");
 	this.quickSortButton.onclick = this.quickSortCallback.bind(this);
-    /*
-	this.mergeSortButton = addControlToAlgorithmBar("Button", "Merge Sort");
-	this.mergeSortButton.onclick = this.mergeSortCallback.bind(this);
-
-	this.shellSortButton = addControlToAlgorithmBar("Button", "Shell Sort");
-	this.shellSortButton.onclick = this.shellSortCallback.bind(this);*/
-
-	//this.sizeButton = addControlToAlgorithmBar("Button", "Change Size");
-	//this.sizeButton.onclick = this.changeSizeCallback.bind(this);
 
 	this.heapsSortButton = addControlToAlgorithmBar("Button", "Heaps Sort");
 	this.heapsSortButton.onclick = this.doHeapSort2.bind(this);
 
-	/*this.pruebaSortButton = addControlToAlgorithmBar("Button", "prueba Sort");
-	this.pruebaSortButton.onclick = this.prueba.bind(this);*/
-
 	this.bubbleSort2Button = addControlToAlgorithmBar("Button", "Bubble Sort2");
 	this.bubbleSort2Button.onclick = this.bubbleSortCallback2.bind(this);
+
+	this.HeapSort = addControlToAlgorithmBar("Button", "heap sort 2");
+	this.HeapSort.onclick = this.heapSort.bind(this);
 
 }
 
@@ -540,6 +525,65 @@ funcion heasp(int n; A[] array){
 	}
 }*/
 //creado el primer metodo HEAPS de forma recursiva 
+
+//estructur basica no recuersiva 2
+/*void heapSort(int arr[], int n)  
+{ 
+    buildMaxHeap(arr, n); 
+  
+    for (int i = n - 1; i > 0; i--) 
+    { 
+        // swap value of first indexed  
+        // with last indexed  
+        swap(arr[0], arr[i]); 
+      
+        // maintaining heap property 
+        // after each swapping 
+        int j = 0, index; 
+          
+        do
+        { 
+            index = (2 * j + 1); 
+              
+            // if left child is smaller than  
+            // right child point index variable  
+            // to right child 
+            if (arr[index] < arr[index + 1] && 
+                                index < (i - 1)) 
+                index++; 
+          
+            // if parent is smaller than child  
+            // then swapping parent with child  
+            // having higher value 
+            if (arr[j] < arr[index] && index < i) 
+                swap(arr[j], arr[index]); 
+          
+            j = index; 
+          
+        } while (index < i); 
+    } 
+}
+void buildMaxHeap(int arr[], int n)  
+{  
+    for (int i = 1; i < n; i++)  
+    { 
+        // if child is bigger than parent 
+        if (arr[i] > arr[(i - 1) / 2])  
+        { 
+            int j = i; 
+      
+            // swap child and parent until 
+            // parent is smaller 
+            while (arr[j] > arr[(j - 1) / 2])  
+            { 
+                swap(arr[j], arr[(j - 1) / 2]); 
+                j = (j - 1) / 2; 
+            } 
+        } 
+    } 
+} 
+*/ 
+
 ComparisonSort.prototype.heaps = function(event){
 	this.animationManager.clearHistory();
 	this.commands = new Array();
@@ -558,6 +602,42 @@ ComparisonSort.prototype.doHeapSort = function(low,high){
 		}
 	}
 }
+//no recursivo2
+ComparisonSort.prototype.heapSort = function(event){
+	this.animationManager.clearHistory();
+	this.commands = new Array();
+
+	for (var i =1 ; i< this.array_size ; i++) {
+		if (this.arrayData[i]>this.arrayData[(i-1)/2]) {
+			var j=i;
+			while(this.arrayData[j]>this.arrayData[(j-1)/2]){
+				this.swap(j,(j-1)/2);
+				j=(j-1)/2;
+			}
+		}	
+	}
+
+	for (var i = this.array_size-1 ; i>0; i--){
+		this.swap(0,i);
+		var j=0, index;
+
+		do{
+			index=(2*j+1);
+
+			if(this.arrayData[index]<this.arrayData[index+1] && index< (i-1)){
+				index=index+1;;
+			}
+			if(this.arrayData[j] < this.arrayData[index] && index < i){
+				this.swap(j,index);
+			}
+				j=index;
+		  }while(index<i);
+		}
+		this.animationManager.StartNewAnimation(this.commands);
+	}
+	
+
+
 
 /////
 ComparisonSort.prototype.bubbleSortCallback2 = function(event)
@@ -593,8 +673,8 @@ ComparisonSort.prototype.bubbleSortCallback2 = function(event)
 	}*/
 	for(var i=this.array_size-1; i>=0 ;i--){
 		//this.swap(arrayData[0],arrayData[i]); //error : el swap solo recibe el indice y no el dato
-		this.swap(0,i);
-		//this.heapify(i,0);
+		//this.swap(0,i);
+		this.heapify(i,0);
 		//this.animationManager.StartNewAnimation(this.commands);
 	}
 	this.animationManager.StartNewAnimation(this.commands);
@@ -616,7 +696,8 @@ ComparisonSort.prototype.doHeapSort2 = function(event){
 	this.animationManager.StartNewAnimation(this.commands);
 }
 ComparisonSort.prototype.heapify = function(n,i){
-	var lergest = i;
+	this.swap(n,i);
+	/*var lergest = i;
 	var l=2*i+1;
 	var r=2*i+2;
 
@@ -632,7 +713,7 @@ ComparisonSort.prototype.heapify = function(n,i){
 		//recursividad 
 		this.heapify(n,largest);
 		this.animationManager.StartNewAnimation(this.commands);
-	}
+	}*/
 }
 ComparisonSort.prototype.mergeSortCallback = function(event)
 {
@@ -775,30 +856,20 @@ ComparisonSort.prototype.insertionSortSkip = function(inc, offset)
 ComparisonSort.prototype.disableUI = function(event)
 {
 	this.resetButton.disabled = true;
-	//this.insertSortButton.disabled = true;
-    //this.selectSortButton.disabled = true;
 	this.bubbleSortButton.disabled = true;
 	this.quickSortButton.disabled = true;
-	//this.mergeSortButton.disabled = true;
-	//this.shellSortButton.disabled = true;
-	//this.sizeButton.disabled = true;
 	this.heapsSortButton.disabled = true;
-	//this.pruebaSortButton.disabled = true;
 	this.bubbleSort2Button.disabled = true;
+	this.heapSort.disable=true;
 }
 ComparisonSort.prototype.enableUI = function(event)
 {
 	this.resetButton.disabled = false;
-	//this.insertSortButton.disabled = false;
-	//this.selectSortButton.disabled = false;
 	this.bubbleSortButton.disabled = false;
 	this.quickSortButton.disabled = false;
-	//this.mergeSortButton.disabled = false;
-	//this.shellSortButton.disabled = false;
-	//this.sizeButton.disabled = false;
 	this.heapsSortButton.disabled = false;
-	//this.pruebaSortButton.disabled = false;
 	this.bubbleSort2Button.disabled = false;
+	this.heapSort.disable=false;
 
 }
 
