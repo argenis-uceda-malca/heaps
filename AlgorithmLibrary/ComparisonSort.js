@@ -78,6 +78,11 @@ ComparisonSort.prototype.addControls =  function()
 	this.HeapSort = addControlToAlgorithmBar("Button", "heap sort 2");
 	this.HeapSort.onclick = this.heapSort.bind(this);
 
+	this.HeapSort3 = addControlToAlgorithmBar("Button", "heap sort 3");
+	this.HeapSort3.onclick = this.heapSort3.bind(this);
+
+
+
 }
 
 		
@@ -616,6 +621,7 @@ ComparisonSort.prototype.heapSort = function(event){
 			}
 		}	
 	}
+	
 
 	for (var i = this.array_size-1 ; i>0; i--){
 		this.swap(0,i);
@@ -636,6 +642,43 @@ ComparisonSort.prototype.heapSort = function(event){
 		this.animationManager.StartNewAnimation(this.commands);
 	}
 	
+//no recursivo3
+ComparisonSort.prototype.heapSort3 = function(event){
+	this.animationManager.clearHistory();
+	this.commands = new Array();
+
+	var raiz=(this.array_size)/2;
+	var hijoI;
+	var hijoD;
+	var hijoM;
+	//for (var i =1 ; i< this.array_size ; i++) 
+	for(var k=raiz; k>0 ; k--){
+		
+		for(var i=raiz; i>0; i--){
+			//this.swap(i,i+1);
+			 hijoI=(2*i);
+			 hijoD=(2*i)+1;
+			if(hijoI<=this.array_size && hijoD<=this.array_size){
+				if(this.arrayData[hijoD]>=this.arrayData[hijoI]){
+					 hijoM=hijoI;
+				}else{
+					hijoM=hijoI;
+				}
+			}else{
+				if (hijoD>this.array_size){
+					hijoM=hijoI;
+				}else{
+					hijoM=hijoD;
+				}
+			}
+			if(this.arrayData[i]<this.arrayData[hijoM]){
+				this.swap(hijoM,i);
+			}
+		}
+	}
+	this.swap(1,this.array_size);
+	this.animationManager.StartNewAnimation(this.commands);
+}
 
 
 
@@ -860,7 +903,8 @@ ComparisonSort.prototype.disableUI = function(event)
 	this.quickSortButton.disabled = true;
 	this.heapsSortButton.disabled = true;
 	this.bubbleSort2Button.disabled = true;
-	this.heapSort.disable=true;
+	this.HeapSort.disable=true;
+	this.HeapSort3.disable=true;
 }
 ComparisonSort.prototype.enableUI = function(event)
 {
@@ -869,7 +913,8 @@ ComparisonSort.prototype.enableUI = function(event)
 	this.quickSortButton.disabled = false;
 	this.heapsSortButton.disabled = false;
 	this.bubbleSort2Button.disabled = false;
-	this.heapSort.disable=false;
+	this.HeapSort.disable=false;
+	this.HeapSort3.disable=false;
 
 }
 
