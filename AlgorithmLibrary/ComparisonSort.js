@@ -60,26 +60,26 @@ ComparisonSort.prototype.init = function(am, w, h)
 
 ComparisonSort.prototype.addControls =  function()
 {
-	this.resetButton = addControlToAlgorithmBar("Button", "Randomize Array");
+	this.resetButton = addControlToAlgorithmBar("Button", "Array Aleatorio");
 	this.resetButton.onclick = this.resetCallback.bind(this);
 
-	this.bubbleSortButton = addControlToAlgorithmBar("Button", "Bubble Sort");
-	this.bubbleSortButton.onclick = this.bubbleSortCallback.bind(this);
+	/*this.bubbleSortButton = addControlToAlgorithmBar("Button", "Bubble Sort");
+	this.bubbleSortButton.onclick = this.bubbleSortCallback.bind(this);*/
 
-	this.quickSortButton = addControlToAlgorithmBar("Button", "Quick Sort");
-	this.quickSortButton.onclick = this.quickSortCallback.bind(this);
+	/*this.quickSortButton = addControlToAlgorithmBar("Button", "Quick Sort");
+	this.quickSortButton.onclick = this.quickSortCallback.bind(this);*/
 
-	this.heapsSortButton = addControlToAlgorithmBar("Button", "Heaps Sort");
-	this.heapsSortButton.onclick = this.doHeapSort2.bind(this);
+	/*this.heapsSortButton = addControlToAlgorithmBar("Button", "Heaps Sort");
+	this.heapsSortButton.onclick = this.doHeapSort2.bind(this);*/
 
-	this.bubbleSort2Button = addControlToAlgorithmBar("Button", "Bubble Sort2");
-	this.bubbleSort2Button.onclick = this.bubbleSortCallback2.bind(this);
+	/*this.bubbleSort2Button = addControlToAlgorithmBar("Button", "Bubble Sort2");
+	this.bubbleSort2Button.onclick = this.bubbleSortCallback2.bind(this);*/
 
 	this.HeapSort = addControlToAlgorithmBar("Button", "heap sort 2");
 	this.HeapSort.onclick = this.heapSort.bind(this);
 
-	this.HeapSort3 = addControlToAlgorithmBar("Button", "heap sort 3");
-	this.HeapSort3.onclick = this.heapSort3.bind(this);
+	/*this.HeapSort3 = addControlToAlgorithmBar("Button", "heap sort 3");
+	this.HeapSort3.onclick = this.heapSort3.bind(this);*/
 
 
 
@@ -613,11 +613,12 @@ ComparisonSort.prototype.heapSort = function(event){
 	this.commands = new Array();
 
 	for (var i =1 ; i< this.array_size ; i++) {
-		if (this.arrayData[i]>this.arrayData[(i-1)/2]) {
-			var j=i;
-			while(this.arrayData[j]>this.arrayData[(j-1)/2]){
-				this.swap(j,(j-1)/2);
-				j=(j-1)/2;
+		//console.log(this.arrayData[Math.trunc((i-1)/2)])
+		if (this.arrayData[i] > this.arrayData[Math.trunc((i-1)/2)]){
+			var j=Math.trunc(i);
+			while(this.arrayData[j]> this.arrayData[Math.trunc((j-1)/2)]){
+				this.swap(Math.trunc(j) , Math.trunc((j-1)/2));
+				j=Math.trunc((j-1)/2);
 			}
 		}	
 	}
@@ -628,10 +629,10 @@ ComparisonSort.prototype.heapSort = function(event){
 		var j=0, index;
 
 		do{
-			index=(2*j+1);
+			index=2*j+1;
 
-			if(this.arrayData[index]<this.arrayData[index+1] && index< (i-1)){
-				index=index+1;;
+			if(this.arrayData[index] < this.arrayData[index+1] && index < (i-1)){
+				index++;;
 			}
 			if(this.arrayData[j] < this.arrayData[index] && index < i){
 				this.swap(j,index);
@@ -899,22 +900,22 @@ ComparisonSort.prototype.insertionSortSkip = function(inc, offset)
 ComparisonSort.prototype.disableUI = function(event)
 {
 	this.resetButton.disabled = true;
-	this.bubbleSortButton.disabled = true;
+	/*this.bubbleSortButton.disabled = true;
 	this.quickSortButton.disabled = true;
 	this.heapsSortButton.disabled = true;
-	this.bubbleSort2Button.disabled = true;
+	this.bubbleSort2Button.disabled = true;*/
 	this.HeapSort.disable=true;
-	this.HeapSort3.disable=true;
+	/*this.HeapSort3.disable=true;*/
 }
 ComparisonSort.prototype.enableUI = function(event)
 {
 	this.resetButton.disabled = false;
-	this.bubbleSortButton.disabled = false;
+	/*this.bubbleSortButton.disabled = false;
 	this.quickSortButton.disabled = false;
 	this.heapsSortButton.disabled = false;
-	this.bubbleSort2Button.disabled = false;
+	this.bubbleSort2Button.disabled = false;*/
 	this.HeapSort.disable=false;
-	this.HeapSort3.disable=false;
+	/*this.HeapSort3.disable=false;*/
 
 }
 
