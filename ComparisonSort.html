@@ -1,62 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Comparison Sorting Visualization</title>
 
     <link rel="stylesheet" href="visualizationPageStyle.css">
+    <link href="css/prism.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="ThirdParty/jquery-ui-1.8.11.custom.css">
-	<script src="ThirdParty/jquery-1.5.2.min.js"></script>
-	<script src="ThirdParty/jquery-ui-1.8.11.custom.min.js"></script>
+    <script src="ThirdParty/jquery-1.5.2.min.js"></script>
+    <script src="ThirdParty/jquery-ui-1.8.11.custom.min.js"></script>
+
 
     <!-- Javascript for the actual visualization code -->
-		<script type = "text/javascript" src = "AnimationLibrary/CustomEvents.js"> </script>
-		<script type = "text/javascript" src = "AnimationLibrary/UndoFunctions.js"> </script>
-		<script type = "text/javascript" src = "AnimationLibrary/AnimatedObject.js"> </script>
-		<script type = "text/javascript" src = "AnimationLibrary/AnimatedLabel.js"> </script>
-		<script type = "text/javascript" src = "AnimationLibrary/AnimatedCircle.js"> </script>
-		<script type = "text/javascript" src = "AnimationLibrary/AnimatedRectangle.js"> </script>
-		<script type = "text/javascript" src = "AnimationLibrary/AnimatedLinkedList.js"> </script>
-		<script type = "text/javascript" src = "AnimationLibrary/HighlightCircle.js"> </script>
-		<script type = "text/javascript" src = "AnimationLibrary/Line.js"> </script>
-		<script type = "text/javascript" src = "AnimationLibrary/ObjectManager.js"> </script>
-		<script type = "text/javascript" src = "AnimationLibrary/AnimationMain.js"> </script>
-		<script type = "text/javascript" src = "AlgorithmLibrary/Algorithm.js"> </script>
-		<script type = "text/javascript" src = "AlgorithmLibrary/ComparisonSort.js"> </script> 
+    <script type="text/javascript" src="AnimationLibrary/CustomEvents.js"> </script>
+    <script type="text/javascript" src="AnimationLibrary/UndoFunctions.js"> </script>
+    <script type="text/javascript" src="AnimationLibrary/AnimatedObject.js"> </script>
+    <script type="text/javascript" src="AnimationLibrary/AnimatedLabel.js"> </script>
+    <script type="text/javascript" src="AnimationLibrary/AnimatedCircle.js"> </script>
+    <script type="text/javascript" src="AnimationLibrary/AnimatedRectangle.js"> </script>
+    <script type="text/javascript" src="AnimationLibrary/AnimatedLinkedList.js"> </script>
+    <script type="text/javascript" src="AnimationLibrary/HighlightCircle.js"> </script>
+    <script type="text/javascript" src="AnimationLibrary/Line.js"> </script>
+    <script type="text/javascript" src="AnimationLibrary/ObjectManager.js"> </script>
+    <script type="text/javascript" src="AnimationLibrary/AnimationMain.js"> </script>
+    <script type="text/javascript" src="AlgorithmLibrary/Algorithm.js"> </script>
+    <script type="text/javascript" src="AlgorithmLibrary/ComparisonSort.js"> </script>
 </head>
-<body onload="init();"  class="VisualizationMainPage">
-    <div id = "container">
-			
-        <div id="header">  
-            <h1>ORDENAMIENTO POR HEAP SORT</h1>
-        </div>
-        
-        <div id = "mainContent"> 
-            
-            <div id = "algoControlSection">
+
+<body onload="init();" class="VisualizationMainPage">
+    <div style="min-height: 100vh; display: flex; flex-direction: column;" id="container">
+
+        <header id="header">
+            <h2>Facultad de ingeniería de sistemas e Informática (Analisis y Diseño de Algoritmos)</h2>
+        </header>
+
+        <main style="flex-grow: 1;" id="mainContent">
+
+            <div id="algoControlSection">
                 <!-- Table for buttons to control specific animation (insert/find/etc) -->
                 <!-- (filled in by javascript code specific to the animtion) -->
-                <table id="AlgorithmSpecificControls"> </table> 
+                <table id="AlgorithmSpecificControls"> </table>
             </div>
-                <!-- Drawing canvas where all animation is done.  Note:  can be resized in code -->
-                                
-            <canvas id="canvas" width="1000" height="500"></canvas>
+            <!-- Drawing canvas where all animation is done.  Note:  can be resized in code -->
 
-            <div id = "generalAnimationControlSection">
+            <div style="display: flex; justify-content: center;"> <canvas id="canvas" width="900" height="400"></canvas>
+                <!-- <img src="imagen/carbon.png " width="300" > -->
+                <pre style="width: 400px; height: 438px;"><code class="language-javascript">
+
+ComparisonSort.prototype.heapSort = function(event){
+this.animationManager.clearHistory();
+this.commands = new Array();
+
+for (var i =1 ; i < this.array_size ; i++) {
+    //console.log(this.arrayData[Math.trunc((i-1)/2)])
+    if (this.arrayData[i] > this.arrayData[Math.trunc((i-1)/2)]){
+        var j=Math.trunc(i);
+        while(this.arrayData[j] > this.arrayData[Math.trunc((j-1)/2)]){
+            this.swap(Math.trunc(j) , Math.trunc((j-1)/2));
+            j=Math.trunc((j-1)/2);
+        }
+    }	
+}
+
+
+for (var i = this.array_size-1 ; i > 0; i--){
+    this.swap(0,i);
+    var j=0, index;
+
+    do{
+        index=2*j+1;
+
+        if(this.arrayData[index] < this.arrayData[index+1] && index < (i-1)){
+            index++;;
+        }
+        if(this.arrayData[j] < this.arrayData[index] && index < i){
+            this.swap(j,index);
+        }
+            j=index;
+        }while(index < i);
+    }
+    this.animationManager.StartNewAnimation(this.commands);
+}
+
+            </code></pre>
+            </div>
+
+        </main> <!-- mainContent -->
+
+        <footer>
+            <div id="generalAnimationControlSection">
                 <!-- Table for buttons to control general animation (play/pause/undo/etc) -->
                 <!-- (filled in by javascript code, specifically AnimationMain.js)  -->
 
-                <table id="GeneralAnimationControls">  </table>   
+                <table id="GeneralAnimationControls"> </table>
             </div>
+        </footer>
 
-            
-        </div> <!-- mainContent -->
-        
-        
 
     </div><!-- container -->
-    
+    <script src="js/prism.js"></script>
 </body>
+
 </html>
