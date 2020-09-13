@@ -1,31 +1,4 @@
-// Copyright 2011 David Galles, University of San Francisco. All rights reserved.
-//
-// Redistribution and use in source and binary forms, with or without modification, are
-// permitted provided that the following conditions are met:
-//
-// 1. Redistributions of source code must retain the above copyright notice, this list of
-// conditions and the following disclaimer.
-//
-// 2. Redistributions in binary form must reproduce the above copyright notice, this list
-// of conditions and the following disclaimer in the documentation and/or other materials
-// provided with the distribution.
-//
-// THIS SOFTWARE IS PROVIDED BY <COPYRIGHT HOLDER> ``AS IS'' AND ANY EXPRESS OR IMPLIED
-// WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-// FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> OR
-// CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-// CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-// SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
-// ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-// NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-// ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
-// The views and conclusions contained in the software and documentation are those of the
-// authors and should not be interpreted as representing official policies, either expressed
-// or implied, of the University of San Francisco
 
-// Global timer used for doing animation callbacks.
-//  TODO:  Make this an instance variable of Animation Manager.
 var timer;
 var swapped = false;
 
@@ -79,7 +52,7 @@ function setCookie(cookieName,value,expireDays)
 }
 
 
-var ANIMATION_SPEED_DEFAULT = 75;
+var ANIMATION_SPEED_DEFAULT = 90;
 
 
 // TODO:  Move these out of global space into animation manager?
@@ -149,7 +122,8 @@ function animWaiting()
 	{
 		stepBackButton.disabled = false;
 	}
-	objectManager.statusReport.setText("Animation Paused");
+	objectManager.statusReport.setText("Uceda Malca Argenis David");
+	//objectManager.statusReport.setText("Animation Paused");
 	objectManager.statusReport.setForegroundColor("#FF0000");
 }
 
@@ -159,7 +133,8 @@ function animStarted()
 	skipBackButton.disabled = false;
 	stepForwardButton.disabled = true;
 	stepBackButton.disabled = true;
-	objectManager.statusReport.setText("Animation Running");
+	objectManager.statusReport.setText("Uceda Malca Argenis David ");
+	//objectManager.statusReport.setText("Animation Running");
 	objectManager.statusReport.setForegroundColor("#009900");
 }
 
@@ -171,7 +146,8 @@ function animEnded()
 	{
 		stepBackButton.disabled = false;		
 	}
-	objectManager.statusReport.setText("Animation Completed");
+	objectManager.statusReport.setText("Uceda Malca Argenis David ");
+	//objectManager.statusReport.setText("Animation Completed");
 	objectManager.statusReport.setForegroundColor("#000000");
 }
 
@@ -288,15 +264,15 @@ function initCanvas()
 	objectManager = new ObjectManager();
 	animationManager = new AnimationManager(objectManager);
 	
-	skipBackButton = addControlToAnimationBar("Button", "Skip Back");
+	skipBackButton = addControlToAnimationBar("Button", "Reiniciar");
 	skipBackButton.onclick = animationManager.skipBack.bind(animationManager);
-	stepBackButton = addControlToAnimationBar("Button", "Step Back");
+	stepBackButton = addControlToAnimationBar("Button", "Regrear");
 	stepBackButton.onclick = animationManager.stepBack.bind(animationManager);
-	playPauseBackButton = addControlToAnimationBar("Button", "Pause");
+	playPauseBackButton = addControlToAnimationBar("Button", "Pausar");
 	playPauseBackButton.onclick = doPlayPause ;
-	stepForwardButton = addControlToAnimationBar("Button", "Step Forward");
+	stepForwardButton = addControlToAnimationBar("Button", "Avanzar");
 	stepForwardButton.onclick = animationManager.step.bind(animationManager) ;
-	skipForwardButton = addControlToAnimationBar("Button", "Skip Forward");
+	skipForwardButton = addControlToAnimationBar("Button", "Ordenar");
 	skipForwardButton.onclick = animationManager.skipForward.bind(animationManager);
 	
 	
@@ -325,7 +301,7 @@ function initCanvas()
 	midLevel = document.createElement("tr");
 	bottomLevel = document.createElement("td");
 	bottomLevel.align = "center";
-	var txtNode = document.createTextNode("Animation Speed"); 
+	var txtNode = document.createTextNode("Regular Velocidad"); 
 	midLevel.appendChild(bottomLevel);
 	bottomLevel.appendChild(txtNode);
 	newTable.appendChild(midLevel);	
@@ -398,20 +374,20 @@ function initCanvas()
 
 	canvas.width = width;
 	canvas.height = height;
+	///
 	
 	
-	
-	tableEntry = document.createElement("td");
+	/*tableEntry = document.createElement("td");
 	txtNode = document.createTextNode(" w:"); 
 	tableEntry.appendChild(txtNode);
-	controlBar.appendChild(tableEntry);
+	controlBar.appendChild(tableEntry);*/
 
 
-	widthEntry = addControlToAnimationBar("Text", canvas.width);
+	widthEntry = addControlToAnimationBar("Text", );
 	widthEntry.size = 4;
 	widthEntry.onkeydown = this.returnSubmit(widthEntry, animationManager.changeSize.bind(animationManager), 4, true);
-
 	
+	/*
 	tableEntry = document.createElement("td");
 	txtNode = document.createTextNode("       h:"); 
 	tableEntry.appendChild(txtNode);
@@ -419,16 +395,16 @@ function initCanvas()
 	
 	heightEntry = addControlToAnimationBar("Text", canvas.height);
 	heightEntry.onkeydown = this.returnSubmit(heightEntry, animationManager.changeSize.bind(animationManager), 4, true);
-
-//	heightEntry.size = 4;
+	
+	heightEntry.size = 4;
 	sizeButton = addControlToAnimationBar("Button", "Change Canvas Size");
 	
 	sizeButton.onclick = animationManager.changeSize.bind(animationManager) ;
 	
 
-        swapButton = addControlToAnimationBar("Button", "Move Controls");
-        swapButton.onclick = swapControlDiv;	
-	
+       swapButton = addControlToAnimationBar("Button", "Move Controls");
+        swapButton.onclick = swapControlDiv;	*/
+	///
 	
 	animationManager.addListener("AnimationStarted", this, animStarted);
 	animationManager.addListener("AnimationEnded", this, this.animEnded);
@@ -454,29 +430,17 @@ function AnimationManager(objectManager)
 	this.awaitingStep = false;
 	this.currentlyAnimating = false;
 	
-	// Array holding the code for the animation.  This is 
-	// an array of strings, each of which is an animation command
-	// currentAnimation is an index into this array
 	this.AnimationSteps = [];
 	this.currentAnimation = 0;
 	
 	this.previousAnimationSteps = [];
-	
-	// Control variables for where we are in the current animation block.
-	//  currFrame holds the frame number of the current animation block,
-	//  while animationBlockLength holds the length of the current animation
-	//  block (in frame numbers).  
+
 	this.currFrame = 0;
 	this.animationBlockLength = 0;
 	
-	//  The animation block that is currently running.  Array of singleAnimations
 	this.currentBlock = null;
 	
-	/////////////////////////////////////
-	// Variables for handling undo. 
-	////////////////////////////////////
-	//  A stack of UndoBlock objects (subclassed, UndoBlock is an abstract base class)
-	//  each of which can undo a single animation element
+
 	this.undoStack = [];
 	this.doingUndo = false;
 	

@@ -7,7 +7,7 @@ function addLabelToAlgorithmBar(labelName)
 	tableEntry.appendChild(element);
 	
 	
-    var controlBar = document.getElementById("AlgorithmSpecificControls");
+    var controlBar = document.getElementById("AlgorithmSpecificControls");//barra de botones de busqueda
 	
     //Append the element in page (in span).
     controlBar.appendChild(tableEntry);
@@ -323,21 +323,11 @@ Algorithm.prototype.reset = function()
 		
 Algorithm.prototype.undo = function(event)
 {
-	// Remvoe the last action (the one that we are going to undo)
+
 	this.actionHistory.pop();
-	// Clear out our data structure.  Be sure to implement reset in
-	//   every AlgorithmAnimation subclass!
+
 	this.reset();
-	//  Redo all actions from the beginning, throwing out the animation
-	//  commands (the animation manager will update the animation on its own).
-	//  Note that if you do something non-deterministic, you might cause problems!
-	//  Be sure if you do anything non-deterministic (that is, calls to a random
-	//  number generator) you clear out the undo stack here and in the animation
-	//  manager.
-	//
-	//  If this seems horribly inefficient -- it is! However, it seems to work well
-	//  in practice, and you get undo for free for all algorithms, which is a non-trivial
-	//  gain.
+
 	var len = this.actionHistory.length;
 	this.recordAnimation = false;
 	for (var i = 0; i < len; i++)
