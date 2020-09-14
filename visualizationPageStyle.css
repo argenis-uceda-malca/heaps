@@ -105,8 +105,6 @@ body {
 	color:#7a1908
 }
 
-
-
 .VisualizationMainPage #footer { 
 	padding: 0 10px;
     background: #7a1908; 
@@ -115,5 +113,24 @@ body {
 .VisualizationMainPage #footer p {
 	margin: 0; 	padding: 10px 0; 
 }
+
+
+#header h2, img {
+	display: inline-block;
+	margin: 10px;
+}
+#header img{
+	float:left;
+}
+#header h2{
+	text-align: center;
+	margin: 40px;
+}
+
+#Integrantes{
+	padding-left: 40px;
+}
+
+
 
 EM {text-decoration: bold;}
