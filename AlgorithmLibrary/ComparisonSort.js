@@ -431,6 +431,7 @@ ComparisonSort.prototype.doHeapSort2 = function (event) {
 	}
 	this.animationManager.StartNewAnimation(this.commands);
 }
+
 ComparisonSort.prototype.heapify = function (n, i) {
 	this.swap(n, i);
 	/*var lergest = i;
