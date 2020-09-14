@@ -46,49 +46,58 @@
             </div>
             <!-- Drawing canvas where all animation is done.  Note:  can be resized in code -->
             <div>
-                <input type="text" id="texto" />
-                
+                <input type="text" placeholder="Insertar cantidad" id="input_cantidad_barras" class="entrada" />
+                <button id="btn_crear_grafica">Crear grafica</button>
+
             </div>
-            <div style="display: flex; justify-content: center;"> <canvas id="canvas" width="900" height="400"></canvas>
+            <div style="display: flex; justify-content: center;">
+                <canvas id="canvas" width="1000" height="300"></canvas>
                 <!-- <img src="imagen/carbon.png " width="300" > -->
-                <pre style="width: 400px; height: 438px;"><code class="language-javascript">
+                <pre style="width: 400px; height: 438px;">
+                    <code class="language-javascript">
+void heapSort(int arr[], int n)  
+{ 
+    buildMaxHeap(arr, n); 
+  
+    for (int i = n - 1; i > 0; i--) 
+    {   
+        swap(arr[0], arr[i]); 
+        int j = 0, index; 
+    
+        do
+        { 
+            index = (2 * j + 1); 
+            if (arr[index] < arr[index + 1] && 
+                                index < (i - 1)) 
+                index++; 
 
-ComparisonSort.prototype.heapSort = function(event){
-this.animationManager.clearHistory();
-this.commands = new Array();
+            if (arr[j] < arr[index] && index < i) 
+                swap(arr[j], arr[index]); 
 
-for (var i =1 ; i < this.array_size ; i++) {
-    //console.log(this.arrayData[Math.trunc((i-1)/2)])
-    if (this.arrayData[i] > this.arrayData[Math.trunc((i-1)/2)]){
-        var j=Math.trunc(i);
-        while(this.arrayData[j] > this.arrayData[Math.trunc((j-1)/2)]){
-            this.swap(Math.trunc(j) , Math.trunc((j-1)/2));
-            j=Math.trunc((j-1)/2);
-        }
-    }	
-}
+            j = index;         
+        } while (index < i); 
+    } 
+} 
 
+void buildMaxHeap(int arr[], int n)  
+{  
+    for (int i = 1; i < n; i++)  
+    { 
+        if (arr[i] > arr[(i - 1) / 2])  
+        { 
+            int j = i; 
+ 
+            while (arr[j] > arr[(j - 1) / 2])  
+            { 
+                swap(arr[j], arr[(j - 1) / 2]); 
+                j = (j - 1) / 2; 
+            } 
+        } 
+    } 
+} 
 
-for (var i = this.array_size-1 ; i > 0; i--){
-    this.swap(0,i);
-    var j=0, index;
-
-    do{
-        index=2*j+1;
-
-        if(this.arrayData[index] < this.arrayData[index+1] && index < (i-1)){
-            index++;;
-        }
-        if(this.arrayData[j] < this.arrayData[index] && index < i){
-            this.swap(j,index);
-        }
-            j=index;
-        }while(index < i);
-    }
-    this.animationManager.StartNewAnimation(this.commands);
-}
-
-            </code></pre>
+            </code>
+        </pre>
             </div>
 
         </main> <!-- mainContent -->
