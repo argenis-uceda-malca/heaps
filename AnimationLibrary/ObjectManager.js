@@ -496,7 +496,7 @@ function ObjectManager()
 	}
 	
 	
-	this.addCircleObject = function (objectID, objectLabel)
+	/*this.addCircleObject = function (objectID, objectLabel)
 	{
 			if (this.Nodes[objectID] != null && this.Nodes[objectID] != undefined)
 			{
@@ -504,7 +504,7 @@ function ObjectManager()
 			}
 			var newNode = new AnimatedCircle(objectID, objectLabel);
 			this.Nodes[objectID] = newNode;
-	}
+	}*/
 	
 	this.getNodeX = function(nodeID)
 	{
@@ -733,7 +733,7 @@ function ObjectManager()
 	}
 	
 		
-	this.addLinkedListObject = function(objectID, nodeLabel, width, height, linkPer, verticalOrientation, linkPosEnd, numLabels, backgroundColor, foregroundColor)
+	/*this.addLinkedListObject = function(objectID, nodeLabel, width, height, linkPer, verticalOrientation, linkPosEnd, numLabels, backgroundColor, foregroundColor)
 	{
 		if (this.Nodes[objectID] != null)
 		{
@@ -742,7 +742,7 @@ function ObjectManager()
 		}
 		var newNode  = new AnimatedLinkedList(objectID, nodeLabel, width, height, linkPer, verticalOrientation, linkPosEnd, numLabels, backgroundColor, foregroundColor);
 		this.Nodes[objectID] = newNode;
-	}
+	}*/
 	
 	 
 	this.getNumElements = function(objectID)

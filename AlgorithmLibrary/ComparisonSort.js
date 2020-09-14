@@ -65,7 +65,7 @@ ComparisonSort.prototype.addControls = function () {
 	this.resetButton = addControlToAlgorithmBar("Button", "Array Aleatorio");
 	this.resetButton.onclick = this.resetCallback.bind(this);
 
-	this.HeapSort = addControlToAlgorithmBar("Button", "heap sort 2");
+	this.HeapSort = addControlToAlgorithmBar("Button", "Heap Sort ");
 	this.HeapSort.onclick = this.heapSort.bind(this);
 
 }
@@ -341,7 +341,7 @@ void buildMaxHeap(int arr[], int n)
 } 
 */
 
-//no recursivo2
+//Heap Sort con MAxHeap
 ComparisonSort.prototype.heapSort = function (event) {
 	this.animationManager.clearHistory();
 	this.commands = new Array();
@@ -479,7 +479,7 @@ function init() {
 				alert('no es un numero');
 			}
 		} else {
-			alert('ingresar un valor');
+			alert('Ingresar un valor');
 		}
 	});
 

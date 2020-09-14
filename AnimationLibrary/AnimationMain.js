@@ -117,7 +117,7 @@ function animStarted() {
 	skipBackButton.disabled = false;
 	stepForwardButton.disabled = true;
 	stepBackButton.disabled = true;
-	objectManager.statusReport.setText("Uceda Malca Argenis David ");
+	objectManager.statusReport.setText("ADA:Grupo 1");
 	//objectManager.statusReport.setText("Animation Running");
 	objectManager.statusReport.setForegroundColor("#009900");
 }

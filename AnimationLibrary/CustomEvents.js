@@ -18,8 +18,8 @@ function EventListener()
 }
 
 
-EventListener.prototype.removeListener = function(kind, scope, func)
-{
+EventListener.prototype.removeListener = function(kind, scope, func) //metoodo ordena las barras sin las animaciones 
+{																	//omite AnimedRectangle/Label
 	if (this.events[kind] == undefined)
 	{
 		return;
