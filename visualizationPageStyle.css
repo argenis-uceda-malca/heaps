@@ -69,7 +69,7 @@ body {
 	
 	
 .VisualizationMainPage #container {
-	background: #672cd3;
+	background: #ec8282;
 	margin: 0 auto; /* the auto margins (in conjunction with a width) center the page */
 	text-align: left; /* this overrides the text-align: center on the body element. */
 }	
