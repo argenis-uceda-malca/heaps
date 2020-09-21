@@ -67,10 +67,19 @@ ComparisonSort.prototype.addControls = function () {
 
 	this.HeapSort = addControlToAlgorithmBar("Button", "Heap Sort ");
 	this.HeapSort.onclick = this.heapSort.bind(this);
+	
+	/*this.cambiarTamaño = addControlToAlgorithmBar("Button", "Establecer tamaño");
+	this.cambiarTamaño.onclick = this.changeSizeCallback.bind(this);*/
 
 }
 
+/*ComparisonSort.prototype.ingresarNum = function(){
+	var valor = document.getElementById("texto").value;
+	ARRAY_SIZE_SMALL=valor;
+}*/
+
 ComparisonSort.prototype.setArraySize = function (small) {
+	//this.ingresarNum();
 	if (small) {
 		this.array_size = ARRAY_SIZE_SMALL;
 		this.array_width = ARRAY_WIDTH_SMALL;
