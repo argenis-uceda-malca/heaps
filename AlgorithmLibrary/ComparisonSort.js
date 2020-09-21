@@ -35,7 +35,7 @@ var INDEX_COLOR = "#0000FF";
 var HIGHLIGHT_BAR_COLOR = "#FF0000";//rojo oscuro
 var HIGHLIGHT_BAR_BACKGROUND_COLOR = "#FFAAAA";//rojo claro
 
-var QUICKSORT_LINE_COLOR = "#FF0000";
+
 
 
 
@@ -345,7 +345,7 @@ void buildMaxHeap(int arr[], int n)
 ComparisonSort.prototype.heapSort = function (event) {
 	this.animationManager.clearHistory();
 	this.commands = new Array();
-
+	//MAxHeap
 	for (var i = 1; i < this.array_size; i++) {
 		//console.log(this.arrayData[Math.trunc((i-1)/2)])
 		if (this.arrayData[i] > this.arrayData[Math.trunc((i - 1) / 2)]) {
